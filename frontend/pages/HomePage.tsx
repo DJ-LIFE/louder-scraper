@@ -4,7 +4,7 @@ import Skeleton from '@/components/Skeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [data, setData] = useState<EventCradProp[]>([]);
   const [loading, setLoading] = useState(true);
   const [popup, setPopup] = useState(false);
@@ -107,3 +107,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;
