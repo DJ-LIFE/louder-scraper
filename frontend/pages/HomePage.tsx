@@ -15,7 +15,7 @@ export const HomePage = () => {
   const [email, setEmail] = useState('');
 
   const fetchEvents = async () => {
-    const response = await axios.get('http://localhost:8081/api/events');
+    const response = await axios.get('https://louder-scraper-backend.vercel.app/api/events');
     return response.data;
   };
 
@@ -44,11 +44,9 @@ export const HomePage = () => {
     } else {
       console.error('Event link is undefined');
     }
-    console.log(email, 'email');
     setEmail('');
   };
 
-  console.log(data, 'data');
   return (
     <div >
       {loading ? (
