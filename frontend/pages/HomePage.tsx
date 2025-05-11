@@ -1,36 +1,21 @@
 'use client';
-import {
-  EventCard,
-  EventCradProp,
-} from '@/components/EventCard';
+import { EventCard, EventCradProp } from '@/components/EventCard';
+import Skeleton from '@/components/Skeleton';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 
 export const HomePage = () => {
-  const [data, setData] = useState<
-    EventCradProp[]
-  >([]);
-  const [loading, setLoading] =
-    useState(true);
-  const [popup, setPopup] =
-    useState(false);
-  const [
-    selectedEvent,
-    setSelectedEvent,
-  ] = useState<EventCradProp | null>(
+  const [data, setData] = useState<EventCradProp[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [popup, setPopup] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventCradProp | null>(
     null
   );
-  const [email, setEmail] =
-    useState('');
+  const [email, setEmail] = useState('');
 
   const fetchEvents = async () => {
-    const response = await axios.get(
-      'http://localhost:8081/api/events'
-    );
+    const response = await axios.get('http://localhost:8081/api/events');
     return response.data;
   };
 
@@ -42,34 +27,22 @@ export const HomePage = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error(
-          'Error fetching events:',
-          error
-        );
+        console.error('Error fetching events:', error);
         setLoading(false);
       });
   }, []);
 
-  const handleCardClick = (
-    event: EventCradProp
-  ) => {
+  const handleCardClick = (event: EventCradProp) => {
     setSelectedEvent(event);
     setPopup(true);
   };
-  const onSubmit = (
-    e: React.FormEvent
-  ) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedEvent?.link) {
-      window.open(
-        selectedEvent.link,
-        '_blank'
-      );
+      window.open(selectedEvent.link, '_blank');
       setPopup(false);
     } else {
-      console.error(
-        'Event link is undefined'
-      );
+      console.error('Event link is undefined');
     }
     console.log(email, 'email');
     setEmail('');
@@ -77,25 +50,25 @@ export const HomePage = () => {
 
   console.log(data, 'data');
   return (
-    <div>
+    <div >
       {loading ? (
-        <p>Loading...</p>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4'>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4">
-          {data.map(
-            (
-              event: EventCradProp,
-              index
-            ) => (
-              <EventCard
-                key={index}
-                data={event}
-                onClick={() =>
-                  handleCardClick(event)
-                }
-              />
-            )
-          )}
+          {data.map((event: EventCradProp, index) => (
+            <EventCard
+              key={index}
+              data={event}
+              onClick={() => handleCardClick(event)}
+            />
+          ))}
         </div>
       )}
       {popup && selectedEvent && (
@@ -106,9 +79,7 @@ export const HomePage = () => {
           >
             <button
               className="absolute top-6 right-6 cursor-pointer"
-              onClick={() =>
-                setPopup(false)
-              }
+              onClick={() => setPopup(false)}
             >
               X
             </button>
@@ -124,11 +95,7 @@ export const HomePage = () => {
                 id="email"
                 className="mt-2 p-2 border border-neutral-400 rounded w-full"
                 value={email}
-                onChange={(e) =>
-                  setEmail(
-                    e.target.value
-                  )
-                }
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <button
