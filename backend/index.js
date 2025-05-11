@@ -33,4 +33,9 @@ app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: 'Hello World' });
 });
 
-app.listen(8081, console.log('Server is listening at 8081'));
+const PORT = process.env.PORT || 8081;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, console.log(`Server is listening at ${PORT}`));
+}
+
+module.exports = app;
