@@ -2,7 +2,6 @@
 import { EventCard, EventCradProp } from '@/components/EventCard';
 import Skeleton from '@/components/Skeleton';
 import axios from 'axios';
-import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export const HomePage = () => {

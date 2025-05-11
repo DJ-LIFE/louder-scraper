@@ -1,0 +1,51 @@
+# Challenges and Approach in Developing the Louder Project
+
+## Overview
+The Louder project is a web application designed to scrape and display event data from external sources. The backend is built using Node.js, Express, and MongoDB, while the frontend leverages Next.js for a modern and responsive user interface. This document highlights the challenges faced during development, the approaches taken to overcome them, and potential areas for improvement.
+
+## Challenges Faced
+
+### 1. Writing the Scraper Logic Using Puppeteer
+One of the most significant challenges was implementing the web scraper using Puppeteer. The scraper needed to:
+- Navigate to the Eventbrite website.
+- Extract event details such as title, date, location, and price.
+- Handle dynamic content loading and ensure data accuracy.
+
+#### Issues Encountered:
+- **Dynamic Content Loading**: Event data was often loaded asynchronously, requiring careful handling of page waits and selectors.
+- **Selector Changes**: The structure of the Eventbrite website occasionally changed, breaking the scraper logic.
+- **Performance**: Running the scraper efficiently without overloading the server or being flagged as a bot was a constant concern.
+
+#### Solutions:
+- Used Puppeteer's `waitForSelector` and `evaluate` methods to handle dynamic content.
+- Implemented robust error handling and fallback mechanisms for missing or changed selectors.
+- Set a realistic user agent and used Puppeteer's `--no-sandbox` and `--disable-setuid-sandbox` flags to improve compatibility and performance.
+
+### 2. Scheduling the Scraper with Node-Cron
+Another challenge was automating the scraper to run periodically using the `node-cron` library. The goal was to ensure the database remained up-to-date with the latest event data.
+
+#### Issues Encountered:
+- **Concurrency**: Ensuring that multiple scraper instances did not run simultaneously, potentially causing data inconsistencies.
+- **Error Recovery**: Handling failures gracefully and retrying failed jobs.
+
+#### Solutions:
+- Used a cron schedule to run the scraper every six hours (`0 */6 * * *`).
+- Added logging to monitor scraper runs and identify issues quickly.
+- Ensured idempotency in database updates by using MongoDB's `updateOne` with the `upsert` option.
+
+## Improvements and Future Work
+
+### 1. Enhance Scraper Resilience
+- Implement a monitoring system to detect and alert on scraper failures.
+- Use a headless browser service like Playwright for better cross-browser compatibility.
+
+### 2. Optimize Database Operations
+- Introduce indexing in MongoDB to speed up queries and updates.
+- Use a connection pool to manage database connections more efficiently in a serverless environment.
+
+### 3. Improve Deployment
+- Address potential issues with serverless environments (e.g., Vercel) by reusing database connections across function invocations.
+- Add environment-specific configurations to handle differences between local and production setups.
+
+## Conclusion
+Developing the Louder project presented several technical challenges, particularly in web scraping and task scheduling. By leveraging Puppeteer and Node-Cron, we successfully implemented a robust solution. However, there is room for improvement in terms of resilience, performance, and deployment practices. These enhancements will ensure the project remains scalable and maintainable in the long term.

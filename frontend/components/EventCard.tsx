@@ -61,14 +61,4 @@ export const EventCard = ({
 // "Eventbrite"
 // title
 // "2025 Sydney Property Expo - May 17-18 (FREE ENTRY)"
-const data = [
-  {
-    title: '2025 Sydney Property Expo - May 17-18 (FREE ENTRY)',
-    location: 'ICC Sydney Convention & Exhibition Centre Hall 1',
-    date: 'Sat, May 17, 10:00 AM',
-    image:
-      'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F973376063%2F94967186259%2F1%2Foriginal.20250303-041905?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=c0833cd98c66a98f4e200c235cb4b98a',
-    source: 'Eventbrite',
-    link: 'https://www.eventbrite.com.au/e/2025-sydney-property-expo-may-17-18-free-entry-tickets-681fbaba7dbc746c5d6f3e85',
-  },
-];
+
