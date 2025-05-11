@@ -1,4 +1,7 @@
 'use client';
+
+import Image from 'next/image';
+
 export interface EventCradProp {
   title: string;
   location: string;
@@ -8,6 +11,7 @@ export interface EventCradProp {
   link: string;
   _id: string;
 }
+
 export const EventCard = ({
   data,
   onClick,
@@ -18,10 +22,13 @@ export const EventCard = ({
   return (
     <>
       <div className="flex flex-col items-center justify-center bg-white shadow-xl cursor-pointer hover:scale-102 hover:transition-all hover:duration-300 rounded-lg m-4 w-96 pb-20 pt-0">
-        <img
+        <Image
           src={data.image}
           alt={data.title}
-          className="rounded-lg w-full h-48 object-cover"
+          layout="responsive"
+          width={16}
+          height={9}
+          className="rounded-lg object-cover"
         />
         <div className="px-4 space-y-2">
           <h2 className="text-xl font-bold mt-2">{data.title}</h2>
@@ -61,4 +68,3 @@ export const EventCard = ({
 // "Eventbrite"
 // title
 // "2025 Sydney Property Expo - May 17-18 (FREE ENTRY)"
-
