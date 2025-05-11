@@ -1,4 +1,7 @@
 'use client';
+
+import Image from "next/image";
+
 export interface EventCradProp {
   title: string;
   location: string;
@@ -18,7 +21,7 @@ export const EventCard = ({
   return (
     <>
       <div className="flex flex-col items-center justify-center bg-white shadow-xl cursor-pointer hover:scale-102 hover:transition-all hover:duration-300 rounded-lg m-4 w-96 pb-20 pt-0">
-        <img
+        <Image
           src={data.image}
           alt={data.title}
           className="rounded-lg w-full h-48 object-cover"
