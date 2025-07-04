@@ -9,7 +9,7 @@ interface.
 The project consists of two main parts:
 
 - **Backend**: A Node.js/Express API for handling event data and scraping
-- **Frontend**: A Next.js application for displaying events to users
+- **Frontend**: A Next.js application for displaying events to users .
 
 ## Backend
 
